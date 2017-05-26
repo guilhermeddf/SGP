@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
 
   has_many :users_tasks, dependent: :destroy
   has_many :tasks, through: :users_tasks
+
+  has_many :notifications
   
   belongs_to :local
   #has_and_belongs_to_many :tasks
@@ -44,7 +46,7 @@ class User < ActiveRecord::Base
   def xp(skill)
     xp_count = 0
 
-    skill.tasks.each do |task|
+    skill.tasks.where(status: 4).each do |task|
       unless task.users.where(id: self.id).empty?
         xp_count += task.user_story.story_points
       end
