@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  #GITHUB
+
+  get 'github/index', to: 'github#index'
+  post 'github/create' => 'github#create'
+  
   # CRUMBOARD
   get '/task/take_task/:id', to: 'scrumboard#take_task', as: 'take_task'
   get '/task/get_out_task/:id', to: 'scrumboard#get_out_task', as: 'get_out_task'
@@ -17,7 +22,7 @@ Rails.application.routes.draw do
 
   #root to: redirect('/users/sign_in')
   root to: 'static#home_page'
-  
+
   get '/dashboard', to: 'dashboard#index', as: 'dashboard'
 
   # routes for select and deselect projects
@@ -27,7 +32,7 @@ Rails.application.routes.draw do
   # errors controller
   get '/wops/no_project_selected', to: 'errors#no_project_selected', as: 'no_project_selected'
 
-  # normal_user 
+  # normal_user
   get '/projects/list', to: 'projects#user_project', as: 'user_project'
 
   #devise_for :users, :controllers  => {
@@ -43,7 +48,7 @@ Rails.application.routes.draw do
   resources :user_stories
   resources :sprints
   resources :releases
-  
+
   resources :themes do
     get :autocomplete, :on => :collection
   end

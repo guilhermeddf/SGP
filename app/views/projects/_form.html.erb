@@ -36,6 +36,15 @@
     <%= f.label :local_id %>
     <%= f.collection_select(:local_id, Local.all, :id, :name, {:prompt => true}, {class: 'ui search dropdown'}) %>
   </div>
+
+  <div class="inline field">
+    <%= label_tag 'Deseja criar repositório?' -%>
+    <input type="checkbox" id="bool_repos">
+    <div id="r_form">
+      <%= render 'repository_form' %>
+    </div>
+
+  </div>
 <% end %>
 
 <script type="text/javascript">
@@ -46,4 +55,18 @@
   $('.ui.search.dropdown').dropdown({ allowLabels:true});
 
   $('.ui.calendar').calendar({type: 'date'});
+/*
+  document.getElementById("r_form").style.display="none";
+  $("#bool_repos").click(function(){
+    console.log($("#bool_repos").val());
+    if($("#bool_repos").val() === "on"){
+      document.getElementById("r_form").style.display="inline";
+      $("#bool_repos").val("off");
+    }
+    else{
+      document.getElementById("r_form").style.display="none";
+      $("bool_repos").val("on");
+    }
+  }); */
+
 </script>

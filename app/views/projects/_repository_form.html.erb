@@ -1,0 +1,45 @@
+<%= form_tag(github_create_path) do -%>
+<br />
+
+  <div class="inline field">
+    <%= label_tag 'Web Site:' -%>
+    <%= text_field_tag 'site', '', size: 30-%>
+  </div>
+
+  <div class="inline field">
+    <%= label_tag 'Descrição:' -%>
+    <%= text_field_tag 'description', '', size: 60-%>
+  </div>
+
+  <div class="inline field">
+    <%= label_tag 'Privado:' -%>
+    <%= radio_button_tag( 'opc_private', 'true')-%>
+    <%= label_tag 'Sim' -%>
+    <%= radio_button_tag( 'opc_private', 'false')-%>
+    <%= label_tag 'Não' -%>
+  </div>
+
+  <div class="inline field">
+    <%= label_tag 'Issues:' -%>
+    <%= radio_button_tag( 'opc_issues', 'true')-%>
+    <%= label_tag 'Sim' -%>
+    <%= radio_button_tag( 'opc_issues', 'false')-%>
+    <%= label_tag 'Não' -%>
+  </div>
+
+  <div class="inline field">
+    <%= label_tag 'Projetos:' -%>
+    <%= radio_button_tag( 'opc_project', 'true')-%>
+    <%= label_tag 'Sim' -%>
+    <%= radio_button_tag( 'opc_project', 'false')-%>
+    <%= label_tag 'Não' -%>
+  </div>
+
+  <div class="inline field">
+    <%= label_tag 'Wiki:' -%>
+    <%= radio_button_tag( 'opc_wiki', 'true')-%>
+    <%= label_tag 'Sim' -%>
+    <%= radio_button_tag( 'opc_wiki', 'false')-%>
+    <%= label_tag 'Não' -%>
+  </div>
+  <% end %>
