@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :select, :scrumboard]
+  before_action :set_client, only: [:create, :destroy]
 
   def select
     session[:project] = @project.id
@@ -12,7 +13,7 @@ class ProjectsController < ApplicationController
   end
 
   def scrumboard
-    
+
   end
 
   def index
@@ -23,7 +24,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def user_project 
+  def user_project
     @projects = current_user.projects
     render :index
   end
@@ -39,10 +40,19 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
+    #falso gerador de links do git
+    link_git = 'https://github.com/'+current_user.usernamegit+'/'+project_params["name"]+'.git'
+    @project = Project.new(project_params.merge(linkgit: link_git))
 
     respond_to do |format|
       if @project.save
+          #funcao que cria repositorio no git
+        @client.create_repository(@project.name, options = {"description": params[:description],
+                        "homepage": params[:site],
+                        "private": params[:opcao_privado],
+                        "has_issues": params[:opc_issues],
+                        "has_projects": params[:opc_project],
+                        "has_wiki": params[:opc_wiki]})
         format.html { redirect_to @project }
       else
         format.html { render :new }
@@ -61,6 +71,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    #funcao que deleta repositorio do git
+    @client.delete_repository(current_user.usernamegit+'/'+@project.name)
     @project.destroy
     session[:project] = nil
     respond_to do |format|
@@ -69,11 +81,15 @@ class ProjectsController < ApplicationController
   end
 
   private
+    def set_client
+      @client = Octokit::Client.new(:login => current_user.usernamegit, :password => current_user.passwordgit)
+    end
+
     def set_project
       @project = Project.find(params[:id])
     end
 
     def project_params
-      params.require(:project).permit(:name, :size, :start_date, :end_date, :local_id)
+      params.require(:project).permit(:name, :size, :start_date, :end_date, :local_id, :linkgit)
     end
 end

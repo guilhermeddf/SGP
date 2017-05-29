@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525193105) do
+ActiveRecord::Schema.define(version: 20170527160455) do
 
   create_table "abilities", force: :cascade do |t|
     t.string   "name"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20170525193105) do
     t.integer  "local_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "linkgit"
   end
 
   add_index "projects", ["local_id"], name: "index_projects_on_local_id"
@@ -234,6 +235,8 @@ ActiveRecord::Schema.define(version: 20170525193105) do
     t.integer  "local_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "usernamegit"
+    t.string   "passwordgit"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

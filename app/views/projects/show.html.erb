@@ -2,7 +2,7 @@
 
 <div class="ui container">
   <!-- NAVBAR -->
-  <div class="ui menu"">
+  <div class="ui menu">
     <a href="#" class="item active"><strong>Projetos</strong></a>
     <%= link_to "Voltar", projects_path, class: 'item' %>
     <%= link_to "Editar", edit_project_path(@project), class: 'item' %>
@@ -22,7 +22,7 @@
 
   <p>
     <strong>
-      <i class="signal icon"></i> 
+      <i class="signal icon"></i>
       Tamanho:
     </strong>
     <%= @project.size %> Story points
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-    
+
   <p></p>
 
   <div class="ui four cards">
@@ -86,6 +86,20 @@
       </div>
 
       <button class="ui bottom attached button" onclick="window.location.href='<%= sprints_path %>'">
+        <i class="settings icon"></i>
+        Gerenciar
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="content">
+        <div class="header">Repositório</div>
+        <div class="description">
+          Gerencie aqui o repositório GitHub do seu projeto
+        </div>
+      </div>
+
+      <button class="ui bottom attached button" onclick="window.location.href='<%= github_index_path %>'">
         <i class="settings icon"></i>
         Gerenciar
       </button>

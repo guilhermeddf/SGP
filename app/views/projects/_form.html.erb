@@ -12,7 +12,7 @@
 
   <div class="inline field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name%>
   </div>
 
   <div class="inline field"><label>Duração</label></div>
@@ -37,12 +37,7 @@
     <%= f.collection_select(:local_id, Local.all, :id, :name, {:prompt => true}, {class: 'ui search dropdown'}) %>
   </div>
 
-  <div class="inline field">
-    <%= label_tag 'Deseja criar repositório?' -%>
-    <input type="checkbox" id="bool_repos">
-    <div id="r_form">
       <%= render 'repository_form' %>
-    </div>
 
   </div>
 <% end %>
@@ -55,18 +50,20 @@
   $('.ui.search.dropdown').dropdown({ allowLabels:true});
 
   $('.ui.calendar').calendar({type: 'date'});
-/*
-  document.getElementById("r_form").style.display="none";
-  $("#bool_repos").click(function(){
-    console.log($("#bool_repos").val());
-    if($("#bool_repos").val() === "on"){
-      document.getElementById("r_form").style.display="inline";
-      $("#bool_repos").val("off");
-    }
-    else{
-      document.getElementById("r_form").style.display="none";
-      $("bool_repos").val("on");
-    }
-  }); */
+
+  document.getElementById('new_project').value;
+
+  function validar(campo) {
+  //se não desejar números é só remover da regex abaixo
+  var regex = '[^a-zA-Z0-9]+';
+  if(campo.match(regex)) {
+       alert('tem coisa errada ai')
+return false;
+  }
+  else {
+       //não encontrou caracteres especiais
+return true;
+  }
+}
 
 </script>

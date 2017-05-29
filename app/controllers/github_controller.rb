@@ -1,28 +1,24 @@
 class GithubController < ApplicationController
-  before_action :set_client, only: [:create]
+  before_action :set_project
+  before_action :set_client
 
-  def select
-    session[:project] = @project.id
-    redirect_to @project
-  end
-
-  def deselect
-    session[:project] = nil
-    redirect_to projects_path
-  end
-
-  def create
-    @client.create_repository(@project.name, options = {"description": params[:description],
-                        "homepage": params[:site],
-                        "private": x,
-                        "has_issues": params[:opc_issues],
-                        "has_projects": params[:opc_project],
-                        "has_wiki": params[:opc_wiki]})
-  end
-
-  private
-    def set_client
-      @client = Octokit::Client.new(:login => 'guilhermeddf', :password => 'a07021991')
+    def index
+      @repository = @client.repository(current_user.usernamegit+'/'+@project.name)
+      @branch = @client.branches(current_user.usernamegit+'/'+@project.name)
     end
 
-  end
+    def branch
+      #@getbranch = @client.branch(current_user.usernamegit+'/'+@project.name, params[branches.name])
+      #@listcommits = @client.commits(current_user.usernamegit+'/'+@project.name, params[branches.name])
+    end
+
+
+    private
+      def set_client
+        @client = Octokit::Client.new(:login => current_user.usernamegit, :password => current_user.passwordgit)
+      end
+
+      def set_project
+        @project = Project.find(current_project_id)
+      end
+end

@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
   #GITHUB
-
   get 'github/index', to: 'github#index'
-  post 'github/create' => 'github#create'
-  
+  get 'github/branch', to: 'github#branch'
+  post 'projects/create_repos', to: 'projects#create_repos', as: 'create_repos'
+
   # CRUMBOARD
   get '/task/take_task/:id', to: 'scrumboard#take_task', as: 'take_task'
   get '/task/get_out_task/:id', to: 'scrumboard#get_out_task', as: 'get_out_task'

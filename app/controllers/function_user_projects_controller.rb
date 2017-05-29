@@ -1,5 +1,7 @@
 class FunctionUserProjectsController < ApplicationController
   before_action :set_function_user_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:create, :destroy]
+  before_action :set_project, only: [:create, :destroy]
   before_filter do
     redirect_to no_project_selected_path unless has_project_selected?
   end
@@ -29,6 +31,9 @@ class FunctionUserProjectsController < ApplicationController
   def create
     @function_user_project = FunctionUserProject.new(function_user_project_params)
     @function_user_project.project_id = current_project_id
+    #funcao que convida o usuario para o repositorio
+    @client.invite_user_to_repository(current_user.usernamegit+'/'+@project.name, User.find(@function_user_project.user_id).usernamegit)
+
     respond_to do |format|
       if @function_user_project.save
         format.html { redirect_to @function_user_project, notice: 'Function user project was successfully created.' }
@@ -58,6 +63,7 @@ class FunctionUserProjectsController < ApplicationController
   # DELETE /function_user_projects/1.json
   def destroy
     @function_user_project.destroy
+    @client.remove_collaborator(current_user.usernamegit+'/'+@project.name, User.find(@function_user_project.user_id).usernamegit)
     respond_to do |format|
       format.html { redirect_to function_user_projects_url, notice: 'Function user project was successfully destroyed.' }
       format.json { head :no_content }
@@ -68,6 +74,12 @@ class FunctionUserProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_function_user_project
       @function_user_project = FunctionUserProject.where(id: params[:id], project_id: current_project_id).first
+    end
+    def set_client
+      @client = Octokit::Client.new(:login => current_user.usernamegit, :password => current_user.passwordgit)
+    end
+    def set_project
+      @project = Project.find(current_project_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'octokit'
 gem 'pundit'
 gem 'rails', '4.2.6'
 gem 'sqlite3'

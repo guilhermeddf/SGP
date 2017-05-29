@@ -11,6 +11,8 @@ class Project < ActiveRecord::Base
   has_many :tasks, through: :user_stories
 
   validates :name, presence: true
+  validates :name, format: { with: /\A[a-zA-Z]+\z/,
+    message: "não permite espaços e/ou caracteres especiais" }
 
   before_save do |project|
     project.start_date = project.start_date.beginning_of_day

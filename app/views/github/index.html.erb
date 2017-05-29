@@ -1,0 +1,51 @@
+<div class="ui container">
+  <div class="ui menu">
+    <a href="#" class="item active"><strong>Repositório</strong></a>
+  </div>
+
+  <%= render 'github/breadcrumb' %>
+
+  <table class="ui celled table">
+    <thead>
+      <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Home Page</th>
+          <th>Privado</th>
+          <th>Issues</th>
+          <th>Projetos</th>
+          <th>Wiki</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+          <td><%= @repository.name %></td>
+          <td><%= @repository.description %></td>
+          <td><%= @repository.homepage %></td>
+          <td><%= @repository.private %></td>
+          <td><%= @repository.has_issues %></td>
+          <td><%= @repository.has_projects %></td>
+          <td><%= @repository.has_wiki %></td>
+        </tr>
+    </tbody>
+  </table>
+
+  <table class="ui celled table">
+    <thead>
+      <tr>
+          <th>Nome</th>
+          <th width="110">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @branch.each do |branches| %>
+          <tr>
+            <td><%= branches.name%></td>
+            <td><%= link_to "Visualizar", github_branch_path(branches.name), class: 'ui blue basic button' %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+
+</div>
