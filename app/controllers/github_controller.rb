@@ -8,10 +8,9 @@ class GithubController < ApplicationController
     end
 
     def branch
-      #@getbranch = @client.branch(current_user.usernamegit+'/'+@project.name, params[branches.name])
-      #@listcommits = @client.commits(current_user.usernamegit+'/'+@project.name, params[branches.name])
+      @getbranch = @client.branch(current_user.usernamegit+'/'+@project.name, params[:bran])
+      @listcommits = @client.commits(current_user.usernamegit+'/'+@project.name, params[:bran])
     end
-
 
     private
       def set_client

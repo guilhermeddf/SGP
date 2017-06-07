@@ -3,7 +3,7 @@
     <a href="#" class="item active"><strong>Repositório</strong></a>
   </div>
 
-  <%= render 'github/breadcrumb' %>
+  <%= render 'github/breadcrumb_repository' %>
 
   <table class="ui celled table">
     <thead>
@@ -42,10 +42,9 @@
         <% @branch.each do |branches| %>
           <tr>
             <td><%= branches.name%></td>
-            <td><%= link_to "Visualizar", github_branch_path(branches.name), class: 'ui blue basic button' %></td>
+            <td><%= link_to "Visualizar", github_branch_path(bran: branches.name), class: 'ui blue basic button' %></td>
           </tr>
         <% end %>
     </tbody>
   </table>
-
 </div>

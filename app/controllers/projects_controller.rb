@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :select, :scrumboard]
-  before_action :set_client, only: [:create, :destroy]
+  before_action :set_client, only: [:create, :destroy, :scrumboard]
 
   def select
     session[:project] = @project.id
@@ -13,7 +13,9 @@ class ProjectsController < ApplicationController
   end
 
   def scrumboard
-
+    teste = @project.linkgit.split('/',4)
+    teste[3].split('.')[0]
+    #@branch = @client.branches(teste[3])
   end
 
   def index

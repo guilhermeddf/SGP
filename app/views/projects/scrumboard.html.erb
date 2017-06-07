@@ -1,9 +1,11 @@
 <h1>Scrumboard</h1>
+<span style="color: #8B8B83;"><%= "Link do Repositório do Projeto: #{@project.linkgit}"%></span>
 
 <div class="ui top attached tabular menu">
   <% @project.sprints.each_with_index do |sprint, i| %>
     <a class="item <%= 'active' if i == 0 %>" data-tab="tab-<%= sprint.id %>"><%= sprint.name %></a>
   <% end %>
+  <a class="item" data-tab="tab-commits">Commits</a>
 </div>
 
 <% @project.sprints.each_with_index do |sprint, i| %>
@@ -24,13 +26,13 @@
     <tbody>
       <tr>
         <td>
-          <%= l sprint.start_date %> à <%= l sprint.end_date %>    
+          <%= l sprint.start_date %> à <%= l sprint.end_date %>
         </td>
         <td>
-          <%= l sprint.planning_start_date %> à <%= l sprint.planning_end_date %>    
+          <%= l sprint.planning_start_date %> à <%= l sprint.planning_end_date %>
         </td>
         <td>
-          <%= l sprint.execution_start_date %> à <%= l sprint.execution_end_date %>    
+          <%= l sprint.execution_start_date %> à <%= l sprint.execution_end_date %>
         </td>
         <td><%= l sprint.review_meeting_date %></td>
         <td><%= l sprint.retrospective_meeting_date %></td>
@@ -60,7 +62,7 @@
       <tr>
         <td class="top aligned">
           <% sprint.user_stories.each do |us| %>
-          
+
           <%= render partial: 'projects/modal_tasks', locals: {us: us} %>
 
           <% us.tasks.where(status: 1).each do |task| %>
@@ -115,7 +117,7 @@
 
         <td class="top aligned">
           <% sprint.user_stories.each do |us| %>
-          
+
           <%# render partial: 'projects/modal_tasks', locals: {us: us} %>
 
           <% us.tasks.where(status: 2).each do |task| %>
@@ -179,7 +181,7 @@
 
         <td class="top aligned">
           <% sprint.user_stories.each do |us| %>
-          
+
           <%# render partial: 'projects/modal_tasks', locals: {us: us} %>
 
           <% us.tasks.where(status: 3).each do |task| %>
@@ -248,7 +250,7 @@
 
         <td class="top aligned">
           <% sprint.user_stories.each do |us| %>
-          
+
           <% us.tasks.where(status: 4).each do |task| %>
             <p></p>
             <!-- CARD -->
@@ -289,7 +291,7 @@
                     <%= l task.start_date %>
                   </p>
                   <% end %>
-                  
+
                   <% unless task.end_date.nil? %>
                   <p>
                     <strong>Concluído em:</strong>
@@ -316,6 +318,10 @@
 </div>
 <% end %>
 
+<div class="ui button attached tab segment" data-tab="tab-commits">
+<%= teste[3]%>
+  
+</div>
 
 <script type="text/javascript">
   $('.tabular.menu .item').tab();

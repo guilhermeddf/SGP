@@ -1,1 +1,47 @@
-<h1>ESSA MERDA TA CHAMANDO </h1>
+<div class="ui container">
+  <div class="ui menu">
+    <a href="#" class="item active"><strong>Branch</strong></a>
+  </div>
+    <%= render 'github/breadcrumb_branch' %>
+
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>SHA</th>
+            <th>Autor do Ultimo Commit</th>
+            <th>Data do Ultimo Commit</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><%= @getbranch.name %></td>
+              <td><%= @getbranch.commit.sha %></td>
+              <td><%= @getbranch.commit.commit.author.name %></td>
+              <td><%= @getbranch.commit.commit.author.date%></td>
+            </tr>
+        </tbody>
+      </table>
+
+      <h5> Commits</h5>
+
+      <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Nome do Autor</th>
+          <th>Data do Commit</th>
+          <th>Comentário</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @listcommits.each do |c| %>
+          <tr>
+            <td> <%=c.commit.author.name %></td>
+            <td> <%=c.commit.author.date %></td>
+            <td> <%=c.commit.message %></td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+
+</div>
