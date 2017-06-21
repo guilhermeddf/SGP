@@ -13,9 +13,8 @@ class ProjectsController < ApplicationController
   end
 
   def scrumboard
-    teste = @project.linkgit.split('/',4)
-    teste[3].split('.')[0]
-    #@branch = @client.branches(teste[3])
+    teste1 = @project.linkgit.split('/',4)
+    teste2 = teste1[3].split('.')[0]
   end
 
   def index

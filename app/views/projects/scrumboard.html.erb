@@ -319,8 +319,31 @@
 <% end %>
 
 <div class="ui button attached tab segment" data-tab="tab-commits">
-<%= teste[3]%>
-  
+    <% divisao1 = @project.linkgit.split('/',4) %>
+    <% divisao2 = divisao1[3].split('.')[0] %>
+    <% listcommits = Octokit.commits(divisao2) %>
+
+    <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>Nome do Autor</th>
+        <th>Data do Commit</th>
+        <th>Comentário</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% listcommits.each do |c| %>
+        <tr>
+
+          <td> <%=c.commit.author.name %></td>
+          <td> <%=c.commit.author.date %></td>
+          <td> <%=c.commit.message %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+
+
 </div>
 
 <script type="text/javascript">
